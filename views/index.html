@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>API Prikaz</title>
+</head>
+<body>
+  <h1>Podaci sa servera</h1>
+  <div id="data"></div>
+
+
+  <script>
+    fetch('http://localhost:3000/api/data')
+      .then(response => response.json())
+      .then(data => {
+        const dataDiv = document.getElementById('data');
+        dataDiv.innerHTML = `
+          <p><strong>Poruka:</strong> ${data.message}</p>
+          <p><strong>Vreme:</strong> ${data.timestamp}</p>
+          <p><strong>Ime:</strong> ${data.ime}</p>
+          <p><strong>Prezime:</strong> ${data.prezime}</p>
+          <p><strong>Puno ime i prezime:</strong> ${data.ime} ${data.prezime}</p>
+        `;
+      })
+      .catch(error => {
+        console.error('Došlo je do greške:', error);
+      });
+  </script>
+</body>
+</html>
